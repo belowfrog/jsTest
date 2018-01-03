@@ -1,0 +1,32 @@
+// simple number array
+var arr = Array.apply(null, {length: 100000}).map(Number.call, Number)
+
+console.time('find')
+arr.find(i => i === 99999)
+console.timeEnd('find')
+
+console.time('findIndex')
+arr.findIndex(i => i === 99999)
+console.timeEnd('findIndex')
+
+console.time('object')
+arr.reduce((memo, cur) => {memo[cur] = cur; return memo}, {})[99999]
+console.timeEnd('object')
+
+console.time('indexOf')
+arr.indexOf(99999)
+console.timeEnd('indexOf')
+
+console.time('filter')
+arr.filter(i => i === 99999)[0]
+console.timeEnd('filter')
+
+console.time('for')
+for (let i = 0, l = arr.length; i < l; i++) {
+  if (i === 99999) break;
+}
+console.timeEnd('for')
+
+console.time('some')
+arr.some(i => i === 99999)
+console.timeEnd('some')
